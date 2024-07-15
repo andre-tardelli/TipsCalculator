@@ -23,5 +23,34 @@ class MainActivity : AppCompatActivity() {
             println("andre" + binding.tieTotal.text)
             println("andre" + binding.tieNumPeople.text)
         }
+
+        var percentage: Int = 0
+        binding.rbOptionOne.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                percentage = 10
+            }
+        }
+
+        binding.rbOptionTwo.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                percentage = 15
+            }
+        }
+
+        binding.rbOptionThree.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                percentage = 20
+            }
+        }
+
+        binding.btnDone.setOnClickListener {
+            val totalTable: Float = binding.tieTotal.text.toString().toFloat()
+            val nPeople: Int = binding.tieNumPeople.text.toString().toInt()
+
+            val totalTemp = totalTable / nPeople
+            val tips = totalTemp * percentage / 100
+            val totalWithTips = totalTemp + tips
+            binding.tvResult.text = ("Total a pagar: $totalWithTips")
+        }
     }
 }
