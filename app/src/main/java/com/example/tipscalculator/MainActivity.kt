@@ -1,5 +1,6 @@
 package com.example.tipscalculator
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -15,15 +16,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.btnClean.setOnClickListener {
-            println("andre" + binding.tieTotal.text)
-            println("andre" + binding.tieNumPeople.text)
-        }
 
         var percentage: Int = 0
         binding.rbOptionOne.setOnCheckedChangeListener { _, isChecked ->
@@ -56,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                     .show()
 
             } else {
+
                 val totalTable = totalTableTemp.toString().toFloat()
                 val nPeople = nPeopleTemp.toString().toInt()
 
@@ -64,6 +62,15 @@ class MainActivity : AppCompatActivity() {
                 val totalWithTips = totalTemp + tips
                 binding.tvResult.text = ("Total a pagar: $totalWithTips")
             }
+        }
+
+        binding.btnClean.setOnClickListener {
+            binding.tvResult.text = ""
+            binding.tieTotal.setText("")
+            binding.tieNumPeople.setText("")
+            binding.rbOptionOne.isChecked = false
+            binding.rbOptionTwo.isChecked = false
+            binding.rbOptionThree.isChecked =false
         }
     }
 }
