@@ -2,6 +2,7 @@ package com.example.tipscalculator
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -41,21 +42,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.num_people,
+            android.R.layout.simple_spinner_item
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerNumberOfPeople.adapter = adapter
+
         binding.btnDone.setOnClickListener {
             val totalTableTemp = binding.tieTotal.text
-            val nPeopleTemp = binding.tieNumPeople.text
 
-            if(totalTableTemp?.isEmpty() == true ||
-                nPeopleTemp?.isEmpty() == true
-                ) {
+            if(totalTableTemp?.isEmpty() == true                ) {
                 Snackbar
                     .make(binding.tieTotal, "Preencha todos os campos", Snackbar.LENGTH_LONG)
                     .show()
-
             } else {
 
                 val totalTable = totalTableTemp.toString().toFloat()
-                val nPeople = nPeopleTemp.toString().toInt()
+                val nPeople: Int = 5
 
                 val totalTemp = totalTable / nPeople
                 val tips = totalTemp * percentage / 100
@@ -67,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnClean.setOnClickListener {
             binding.tvResult.text = ""
             binding.tieTotal.setText("")
-            binding.tieNumPeople.setText("")
             binding.rbOptionOne.isChecked = false
             binding.rbOptionTwo.isChecked = false
             binding.rbOptionThree.isChecked =false
