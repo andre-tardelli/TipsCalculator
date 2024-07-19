@@ -97,15 +97,19 @@ class MainActivity : AppCompatActivity() {
                     putExtra("totalAmount", totalWithTips)
 
                 }
+                clean()
                 startActivity(intent)
             }
         }
 
         binding.btnClean.setOnClickListener {
-            binding.tieTotal.setText("")
-            binding.rbOptionOne.isChecked = false
-            binding.rbOptionTwo.isChecked = false
-            binding.rbOptionThree.isChecked =false
+            clean()
         }
+    }
+    private fun clean() {
+        binding.tieTotal.setText("")
+        binding.rbOptionOne.isChecked = false
+        binding.rbOptionTwo.isChecked = false
+        binding.rbOptionThree.isChecked =false
     }
 }
